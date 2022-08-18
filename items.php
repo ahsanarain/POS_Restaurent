@@ -16,6 +16,7 @@ $totalRows_rsMgtList = mysqli_num_rows($rsMgtList);
 <title>Main Menu Items</title>
 <script src="js/jquery.js"></script>
 <link href="css/styles.css" type="text/css" rel="stylesheet" />
+    <script src="js/sweetalert2.all.min.js"></script>
 <style>
 .table-hover thead tr:hover th, 
  .table-hover tbody tr:hover td {
@@ -42,7 +43,21 @@ $totalRows_rsMgtList = mysqli_num_rows($rsMgtList);
 <?php include 'include/header.php' ?>
 <div class="admin-greyBg">
   <div class="admin-wrapper">
-	<div id="msg" align="center"><?php if(isset($_GET['msg'])) { echo $_GET['msg']; } ?></div>
+	<div id="msg" align="center">
+        <?php
+        if(isset($_GET['msg']))
+        {
+            echo '
+            <script>
+            Swal.fire({
+              icon: "success",
+              title: "OK",
+              text: "'.$_GET['msg'].'",
+            });
+                window.history.pushState("object or string", "Title", window.location.href.split("?")[0]);
+            </script>';
+        }
+        ?></div>
     <div id="admin-leftNav" class="admin-fLeft">
 <?php include 'include/left_nav.php' ?>
     </div>

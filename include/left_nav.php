@@ -72,11 +72,6 @@
                     </a>
                 </li>
                 <li class="last">
-                    <a href="<?=$website?>" target="_blank">
-                        <span>Website</span>
-                    </a>
-                </li>
-                <li class="last">
                     <a href="logout.php">
                         <span>Logout</span>
                     </a>

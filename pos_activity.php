@@ -705,12 +705,6 @@ function checkTime(i) {
 <img src='images/PIZZ.JPG' WIDTH='50%'>
 </center>
 <br><br><br><br>
-<b>
-Syed IQtidar Shah<br>
-<a href="http://www.syediqtidarshah.com" target="_blank">syediqtidarshah.com</a><br>
-03321584030
-</b>
-   
    </div>
    <div id="two" class='subitems section-to-print' style="width:400px !important;">
    <form name='formqty' id='formqty' method='POST' action='possave.php'>

@@ -2,7 +2,7 @@
 /* CSS Document */
 body { margin:0; padding:0; font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:13px; color:#333333; }
 .admin-greyBg { background-color:#FFFFFF; padding-bottom:20px; padding-top:20px; }
-.admin-blueStrip { display:block; height:10px; background-color:#b30504; }
+.admin-blueStrip { display:block; height:10px; background-color:black; }
 .admin-wrapper { display:block; width:1300px; margin-left:auto; margin-right:auto; }
 a { color:#333333; text-decoration:none; }
 a:hover { color:#FF6900; }
@@ -198,7 +198,7 @@ p { margin:0; padding:0 0 15px 0; }
   display: block;
   color: #ffffff;
   text-shadow: 0 1px 1px #000;
- background-color:#b30504;
+ background-color: #464242;
   border: 1px solid #000;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
