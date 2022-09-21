@@ -20,18 +20,18 @@ if(!empty($_POST['txtdate'])){
 	$to = date("Y-m-d", strtotime($to));
 
 	$query_rsFilterDisplay = "SELECT
-								SUM(AMOUNT) AS AMOUNT,
-								SUM(SERVICE_CHARGE) AS SERVICE_CHARGE,
-								SUM(DISCOUNT) AS DISCOUNT,
-                                                                ROUND(AVG(TAX1),0) AS TAX1,
-                                                                ROUND(AVG(TAX2),0) AS TAX2,
-																ROUND(AVG(TAX3),0) AS TAX3
-								FROM
-								ORDER_TAB 
-								WHERE
-								AMOUNT_STATUS NOT IN ('C','P') AND 
-								DATE(DATE_TIME) 
-								BETWEEN  '$from' and '$to'";
+								SUM(amount) AS AMOUNT,
+								SUM(service_charge) AS SERVICE_CHARGE,
+								SUM(discount) AS DISCOUNT,
+                                                                ROUND(AVG(tax1),0) AS TAX1,
+                                                                ROUND(AVG(tax2),0) AS TAX2,
+																ROUND(AVG(tax3),0) AS TAX3
+								from
+								order_tab 
+								where
+								amount_status not in ('C','P') and 
+								date(date_time) 
+								between  '$from' and '$to'";
         
         
 	

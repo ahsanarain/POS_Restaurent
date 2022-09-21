@@ -105,7 +105,7 @@
 	if(isset($_POST['method'])){
 	if($_POST['method']=='orderCancelled'){
 		$itemID = $_POST['itemid'];
-		$updateQry = "UPDATE ORDER_TAB SET STATUS = '0', AMOUNT_STATUS = 'C' WHERE ORDER_ID = '".$itemID."'";
+		$updateQry = "update order_tab set status = '0', amount_status = 'C' where order_id = '".$itemID."'";
 		mysqli_query($cn, $updateQry);		
 		exit();
 	}
@@ -116,7 +116,7 @@ if(isset($_POST['method'])){
 	if($_POST['method']=='paymentMade'){
 	$date = date('Y-m-d H:i:s');
 		$itemID = $_POST['itemid'];
-		$updateQry = "UPDATE ORDER_TAB SET STATUS = '0', AMOUNT_STATUS = 'R', order_rec_date = '".$date."'  WHERE ORDER_ID = '".$itemID."'";
+		$updateQry = "update order_tab set status = '0', amount_status = 'R', order_rec_date = '".$date."'  where order_id = '".$itemID."'";
 		mysqli_query($cn, $updateQry);	
 		
 		 $sql = "select sub_item_id, sum(qty) as qty from sub_order_tab where order_id = '$itemID' order by qty";
@@ -224,7 +224,7 @@ if(empty($arrAuto)){
 				</tr>
 				<?php 
 					$ID = $data['order_id'];
-					$qrysub = "SELECT ITEM,QTY FROM SUB_ORDER_TAB WHERE ORDER_ID = '$ID'";
+					$qrysub = "select item,qty from sub_order_tab where order_id = '$ID'";
 					$rowsub = mysqli_query($cn, $qrysub) or die(mysqli_error($cn));
 					$arrsub=array();
 					while($data= mysqli_fetch_assoc($rowsub)){

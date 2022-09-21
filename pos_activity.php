@@ -20,7 +20,7 @@ $arrAuto=array();
 while($data= mysqli_fetch_assoc($row_rsauto)){
 	$arrAuto[] = $data['customer_id'].'-'.$data['customer_name'];
 }
-$maxID = "SELECT MAX(ORDER_ID) oid from ORDER_TAB";
+$maxID = "select max(order_id) oid from order_tab";
 		$rID = mysqli_query($cn, $maxID) or die(mysqli_error($cn));
 		$arrAuto1=array();
 		while($data= mysqli_fetch_assoc($rID)){

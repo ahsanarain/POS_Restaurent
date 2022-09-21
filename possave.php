@@ -43,7 +43,7 @@ $insertQry = "insert into order_tab
 			  
 	if(mysqli_query($cn, $insertQry ))
 	{
-		$maxID = "SELECT MAX(ORDER_ID) oid from ORDER_TAB";
+		$maxID = "select max(order_id) oid from order_tab";
 		$rID = mysqli_query($cn, $maxID) or die(mysqli_error($cn));
 		$arrAuto=array();
 		while($data= mysqli_fetch_assoc($rID)){

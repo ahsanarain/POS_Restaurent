@@ -78,7 +78,7 @@ $qmsg = "SELECT msg FROM qtmsg where status='1'";
 $rmsg = mysqli_query($cn, $qmsg) or die(mysqli_error($cn));
 $datamsg= mysqli_fetch_assoc($rmsg);
 
-$maxID = "SELECT MAX(ORDER_ID) oid from ORDER_TAB";
+$maxID = "select max(order_id) oid from order_tab";
 		$rID = mysqli_query($cn, $maxID) or die(mysqli_error($cn));
 		$arrAuto1=array();
 		while($data= mysqli_fetch_assoc($rID)){

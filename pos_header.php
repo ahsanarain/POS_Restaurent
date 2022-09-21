@@ -99,7 +99,7 @@ if(empty($arrAuto)){
 				</tr>
 				<?php 
 					$ID = $data['order_id'];
-					$qrysub = "SELECT ITEM,QTY FROM SUB_ORDER_TAB WHERE ORDER_ID = '$ID'";
+					$qrysub = "select item,qty from sub_order_tab where order_id = '$ID'";
 					$rowsub = mysqli_query($cn, $qrysub) or die(mysqli_error($cn));
 					$arrsub=array();
 					while($data= mysqli_fetch_assoc($rowsub)){

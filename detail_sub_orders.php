@@ -7,7 +7,7 @@ $flag="grid";
 if(isset($_POST['method'])){
 	if($_POST['method']=='paymentMade'){
 		$itemID = $_POST['itemid'];
-		$updateQry = "UPDATE ORDER_TAB SET STATUS = '0', AMOUNT_STATUS = 'R' WHERE ORDER_ID = '".$itemID."'";
+		$updateQry = "update order_tab set status = '0', amount_status = 'R' where order_id = '".$itemID."'";
 		mysqli_query($cn, $updateQry);
 		$sql = "select sub_item_id, sum(qty) as qty from sub_order_tab where order_id = '$itemID' order by qty";
                 $row_rsauto = mysqli_query($cn, $sql) or die(mysqli_error($cn));
@@ -53,7 +53,7 @@ if(isset($_POST['method'])){
 if(isset($_POST['method'])){
 	if($_POST['method']=='orderCancelled'){
 		$itemID = $_POST['itemid'];
-		$updateQry = "UPDATE ORDER_TAB SET STATUS = '0', AMOUNT_STATUS = 'C' WHERE ORDER_ID = '".$itemID."'";
+		$updateQry = "update order_tab set status = '0', amount_status = 'C' where order_id = '".$itemID."'";
 		mysqli_query($cn, $updateQry);		
 		exit();
 	}

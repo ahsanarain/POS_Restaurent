@@ -15,7 +15,7 @@ $arrAuto=array();
 while($data= mysqli_fetch_assoc($row_rsauto)){
 	$arrAuto[] = $data['SNAME'];
 }
-$maxID = "SELECT MAX(ORDER_ID) oid from ORDER_TAB";
+$maxID = "select max(order_id) oid from order_tab";
 		$rID = mysqli_query($cn, $maxID) or die(mysqli_error($cn));
 		$arrAuto1=array();
 		while($data= mysqli_fetch_assoc($rID)){
@@ -59,7 +59,7 @@ if(isset($_POST['method'])){
 if(isset($_POST['method'])){
 	if($_POST['method']=='paymentMade'){
 		$itemID = $_POST['itemid'];
-		$updateQry = "UPDATE ORDER_TAB SET STATUS = '0', AMOUNT_STATUS = 'R' WHERE ORDER_ID = '".$itemID."'";
+		$updateQry = "update order_tab set status = '0', amount_status = 'R' where order_id = '".$itemID."'";
 		mysqli_query($cn, $updateQry);		
 		exit();
 	}
@@ -67,7 +67,7 @@ if(isset($_POST['method'])){
 if(isset($_POST['method'])){
 	if($_POST['method']=='orderCancelled'){
 		$itemID = $_POST['itemid'];
-		$updateQry = "UPDATE ORDER_TAB SET STATUS = '0', AMOUNT_STATUS = 'C' WHERE ORDER_ID = '".$itemID."'";
+		$updateQry = "update order_tab set status = '0', amount_status = 'C' where order_id = '".$itemID."'";
 		mysqli_query($cn, $updateQry);		
 		exit();
 	}
