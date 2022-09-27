@@ -331,7 +331,7 @@ $(function() {
    <div id="one" class='subitems'> 
 <h1>Welcome to <?=$org_name?> (Point Of Sale)</h1>
 <br><center>
-<img src='images/PIZZ.JPG' WIDTH='45%'>
+<img src='images/PIZZ.jpg' WIDTH='45%'>
 </center>
 <br><br>
 <b>

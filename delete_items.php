@@ -10,7 +10,6 @@ $row=mysqli_fetch_array($res);
 
 unlink("images/items/".$row['item_image']);
 
-
 mysqli_query($cn, "delete from items where item_id = '$itemDeleteId'");
 header("location: items.php?msg=Record+Deleted+Successfully");
-?>
+

@@ -12,10 +12,10 @@ $password = $_POST['password'];
 $npassword = $_POST['new_password'];
 $cpassword = $_POST['confirm_password'];
 
-if($data['password']== sha1($password) && $npassword == $cpassword){
+if($data['password']== sha1($password) && $npassword == $cpassword)
+{
    mysqli_query($cn, "update staff_reg set password = sha1('$npassword') where sid = '".$_SESSION['sid']."' and user_id = '".$_SESSION['user_id']."'"); 
-   header("location: change.php?msg=Password+Changed+Successfully!"); 
-   
-}else{
-   header("location: change.php?msg=Canot+change+Password+Try+Again!");
+   header("location: change.php?msg=Password+Changed+Successfully!");
 }
+else
+   header("location: change.php?msg=Canot+change+Password+Try+Again!");

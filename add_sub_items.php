@@ -8,8 +8,8 @@ $query_rsauto = "SELECT upper(keyword_name) as exp_desc FROM keywords_ing where 
 $row_rsauto = mysqli_query($cn, $query_rsauto) or die(mysqli_error($cn));
 $arrAuto=array();
 while($data= mysqli_fetch_assoc($row_rsauto)) $arrAuto[] = $data['exp_desc'];
-
 ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -25,59 +25,80 @@ while($data= mysqli_fetch_assoc($row_rsauto)) $arrAuto[] = $data['exp_desc'];
     <link href="css/styles.css" type="text/css" rel="stylesheet" />
 
     <script>
-        $(document).on('click','.add',function(){
+        $(document).on('click','.add',function()
+        {
             $('.details tbody>tr:last').clone(true).insertAfter('.details tbody>tr:last');
             $('.details tbody>tr:last').children().find('.itm').val('');
             $('.details tbody>tr:last').children().find('.amt').val('');
         });
-        $(document).on('click','.minus',function(){
+
+        $(document).on('click','.minus',function()
+        {
             var row = $(this).parent().parent().index();
-            if(row != 0){
+            if(row != 0)
+            {
                 $(this).parent().parent().remove();
             }
         });
-        $(document).on('click','#save_ing',function(){
+
+        $(document).on('click','#save_ing',function()
+        {
             var chk=0;
-            $(".itm").each(function(){
-                if($(this).val()==''){
+            $(".itm").each(function()
+            {
+                if($(this).val()=='')
+                {
                     chk=1;
                     return false;
                 }
             });
-            if(chk==1){
+
+            if(chk==1)
+            {
                 alert("Can't Store Null Value to the database.");
                 return false;
-            }else{
+            }
+            else
+            {
                 $("#frmdetail").submit();
             }
 
         });
 
-
-        $(document).on('click','#save_deal',function(){
+        $(document).on('click','#save_deal',function()
+        {
             var chk=0;
-            $(".qty").each(function(){
-                if($(this).val()==''){
+            $(".qty").each(function()
+            {
+                if($(this).val()=='')
+                {
                     chk=1;
                     return false;
                 }
-            }) ;
-            if(chk==1){
+            });
+
+            if(chk==1)
+            {
                 alert("Can't Store Null Value to the database.");
                 return false;
-            }else{
+            }
+            else
+            {
                 $("#frmdeal").submit();
             }
-
         });
 
-        $(document).on('click','.addd',function(){
+        $(document).on('click','.addd',function()
+        {
             $('.deal tbody>tr:last').clone(true).insertAfter('.deal tbody>tr:last');
             $('.deal tbody>tr:last').children().find('.qty').val('');
         });
-        $(document).on('click','.minusd',function(){
+
+        $(document).on('click','.minusd',function()
+        {
             var row = $(this).parent().parent().index();
-            if(row != 0){
+            if(row != 0)
+            {
                 $(this).parent().parent().remove();
             }
         });
@@ -132,8 +153,8 @@ while($data= mysqli_fetch_assoc($row_rsauto)) $arrAuto[] = $data['exp_desc'];
                                             <tr>
                                                 <td><strong>Status:</strong></td>
                                                 <td><select name="status" id="status" class="admin-inputBox">
-                                                            <option value="1">Publish</option>
-                                                            <option value="0"> Un-Publish</option>
+                                                        <option value="1">Publish</option>
+                                                        <option value="0"> Un-Publish</option>
                                                     </select></td>
                                             </tr>
                                             <tr>
@@ -154,7 +175,6 @@ while($data= mysqli_fetch_assoc($row_rsauto)) $arrAuto[] = $data['exp_desc'];
                 </tr>
             </table>
             </table>
-
         </div>
         <br clear="all" />
     </div>

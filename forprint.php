@@ -8,67 +8,62 @@ $datamsg= mysqli_fetch_assoc($rmsg);
 
 $footer_msg = (isset($datamsg['msg'])?$datamsg['msg']:'');
 
-$strForPrint ="";     
-if(isset($_POST['method'])){
-	if($_POST['method']=='printCustomer'){
-		$strForPrint ="";
-		$order_id = $_POST['order_id'];
-		$fetch = "select * from order_tab o, sub_order_tab s
-					WHERE
-					o.order_id = '".$order_id."'
-					and s.order_id = '".$order_id."'
-					and o.order_id = s.order_id";
-		  		$rowrsauto=mysqli_query($cn, $fetch,$cn);
-               $arrAuto=array();
-                while($data= mysqli_fetch_assoc($rowrsauto)){
-                        $arrAuto[] = $data;
-                }
-//				print_r($arrAuto);
-//			exit();	
-				$order_id = $arrAuto[0]['order_id'];
-				$customer = $arrAuto[0]['customer_name'];
-				$arrdt = explode(" ",$arrAuto[0]['date_time']);
-				$tm = $arrdt[1];
-				$arrdt = explode("-",$arrdt[0]);
-				
-				$dd = $arrdt[2];
-				$mm = $arrdt[1];
-				$yy = $arrdt[0];
-				
-				$dt = $dd.'-'.$mm.'-'.$yy.' '.$tm;
-				 
-				
-				
-				$phone = $arrAuto[0]['phone'];
-				$order_type = $arrAuto[0]['order_type'];
-				$order_desc = "";
-				if($order_type == "S"){
-					$order_desc = "Service";
-				}
-				elseif($order_type=="D"){
-					$order_desc = "Delivery";
-				}
-				else{
-					$order_desc = "Take Away";
-				}
-				
-				$user = $arrAuto[0]['usr'];
-				$sc = $arrAuto[0]['service_charge'];
-				$discount = $arrAuto[0]['discount'];
-				$amount = $arrAuto[0]['amount'];
-				$comments = $arrAuto[0]['comments'];
-				$amount_status = $arrAuto[0]['amount_status'];
-				$amount_desc = "";
-				
-				if($amount_status == "P"){
-					$amount_desc = "Not Paid";
-				}
-				elseif($amount_status == "P"){
-					$amount_desc = "Paid";
-				}
-				
-			
-				$strForPrint .= "<table width='288' border='0' align='center' cellpadding='0' cellspacing='0'>
+$strForPrint ="";
+if(isset($_POST['method']))
+{
+    if($_POST['method']=='printCustomer')
+    {
+        $strForPrint ="";
+        $order_id = $_POST['order_id'];
+        $fetch = "select * from order_tab as o
+                    inner join sub_order_tab as s on o.order_id = s.order_id
+					WHERE o.order_id = '".$order_id."'";
+        $rowrsauto=mysqli_query($cn, $fetch);
+        $arrAuto=array();
+        while($data= mysqli_fetch_assoc($rowrsauto)) $arrAuto[] = $data;
+
+        $order_id = $arrAuto[0]['order_id'];
+        $customer = $arrAuto[0]['customer_name'];
+        $arrdt = explode(" ",$arrAuto[0]['date_time']);
+        $tm = $arrdt[1];
+        $arrdt = explode("-",$arrdt[0]);
+
+        $dd = $arrdt[2];
+        $mm = $arrdt[1];
+        $yy = $arrdt[0];
+
+        $dt = $dd.'-'.$mm.'-'.$yy.' '.$tm;
+
+        $phone = $arrAuto[0]['phone'];
+        $order_type = $arrAuto[0]['order_type'];
+        $order_desc = "";
+        if($order_type == "S"){
+            $order_desc = "Service";
+        }
+        elseif($order_type=="D"){
+            $order_desc = "Delivery";
+        }
+        else{
+            $order_desc = "Take Away";
+        }
+
+        $user = $arrAuto[0]['usr'];
+        $sc = $arrAuto[0]['service_charge'];
+        $discount = $arrAuto[0]['discount'];
+        $amount = $arrAuto[0]['amount'];
+        $comments = $arrAuto[0]['comments'];
+        $amount_status = $arrAuto[0]['amount_status'];
+        $amount_desc = "";
+
+        if($amount_status == "P"){
+            $amount_desc = "Not Paid";
+        }
+        elseif($amount_status == "P"){
+            $amount_desc = "Paid";
+        }
+
+
+        $strForPrint .= "<table width='288' border='0' align='center' cellpadding='0' cellspacing='0'>
   <tr>
 <td align='center' valign='top'>
 			<style type='text/css'>
@@ -102,10 +97,10 @@ if(isset($_POST['method'])){
             <td width='60' align='right'><strong>Price</strong></td>
             <td width='73' align='right'><strong>Total</strong></td>
             ";
-		$gross=0;
-		foreach($arrAuto as $data){	
-			
-		$strForPrint.="	</tr>
+        $gross=0;
+        foreach($arrAuto as $data){
+
+            $strForPrint.="	</tr>
             
                 <tr>
                 <td>".$data['item']."</td>
@@ -113,10 +108,10 @@ if(isset($_POST['method'])){
                 <td align='right'>".$data['price']."</td>
                 <td align='right'>".($data['qty'] * $data['price'])."</td>
            </tr>";
-		   $gross = $gross + ($data['qty'] * $data['price']);
-		  }
-           
- $strForPrint .="</table>
+            $gross = $gross + ($data['qty'] * $data['price']);
+        }
+
+        $strForPrint .="</table>
             
 			<hr>
             <table width='100%' border='0'>
@@ -162,72 +157,61 @@ if(isset($_POST['method'])){
 </table>
 <p style='page-break-before: always'></p>
 ";
-	echo $strForPrint; exit();
-	}
+        echo $strForPrint; exit();
+    }
 }
 
-
-
 if(isset($_POST['method'])){
-	if($_POST['method']=='printKitchen'){
-		$order_id = $_POST['order_id'];
-		$strForPrint ="";
-		$fetch = "select * from order_tab o, sub_order_tab s
-					WHERE
-					o.order_id = '".$order_id."'
-					and s.order_id = '".$order_id."'
-					and o.order_id = s.order_id";
-		  		$rowrsauto=mysqli_query($cn, $fetch,$cn);
-               $arrAuto=array();
-                while($data= mysqli_fetch_assoc($rowrsauto)){
-                        $arrAuto[] = $data;
-                }
-//				print_r($arrAuto);
-//			exit();	
-				$order_id = $arrAuto[0]['order_id'];
-				$customer = $arrAuto[0]['customer_name'];
-				$arrdt = explode(" ",$arrAuto[0]['date_time']);
-				$tm = $arrdt[1];
-				$arrdt = explode("-",$arrdt[0]);
-				
-				$dd = $arrdt[2];
-				$mm = $arrdt[1];
-				$yy = $arrdt[0];
-				
-				$dt = $dd.'-'.$mm.'-'.$yy.' '.$tm;
-				 
-				
-				
-				$phone = $arrAuto[0]['phone'];
-				$order_type = $arrAuto[0]['order_type'];
-				$order_desc = "";
-				if($order_type == "S"){
-					$order_desc = "Service";
-				}
-				elseif($order_type=="D"){
-					$order_desc = "Delivery";
-				}
-				else{
-					$order_desc = "Take Away";
-				}
-				
-				$user = $arrAuto[0]['usr'];
-				$sc = $arrAuto[0]['service_charge'];
-				$discount = $arrAuto[0]['discount'];
-				$amount = $arrAuto[0]['amount'];
-				$comments = $arrAuto[0]['comments'];
-				$amount_status = $arrAuto[0]['amount_status'];
-				$amount_desc = "";
-				
-				if($amount_status == "P"){
-					$amount_desc = "Not Paid";
-				}
-				elseif($amount_status == "P"){
-					$amount_desc = "Paid";
-				}
-				
-			
-				$strForPrint .= "<table width='288' border='0' align='center' cellpadding='0' cellspacing='0'>
+    if($_POST['method']=='printKitchen')
+    {
+        $order_id = $_POST['order_id'];
+        $strForPrint ="";
+        $fetch = "select * from order_tab as o
+                    inner join sub_order_tab as s on o.order_id = s.order_id
+					WHERE o.order_id = '".$order_id."'";
+        $rowrsauto=mysqli_query($cn, $fetch);
+        $arrAuto=array();
+        while($data= mysqli_fetch_assoc($rowrsauto)) $arrAuto[] = $data;
+        $order_id = $arrAuto[0]['order_id'];
+        $customer = $arrAuto[0]['customer_name'];
+        $arrdt = explode(" ",$arrAuto[0]['date_time']);
+        $tm = $arrdt[1];
+        $arrdt = explode("-",$arrdt[0]);
+
+        $dd = $arrdt[2];
+        $mm = $arrdt[1];
+        $yy = $arrdt[0];
+
+        $dt = $dd.'-'.$mm.'-'.$yy.' '.$tm;
+
+        $phone = $arrAuto[0]['phone'];
+        $order_type = $arrAuto[0]['order_type'];
+        $order_desc = "";
+        if($order_type == "S"){
+            $order_desc = "Service";
+        }
+        elseif($order_type=="D"){
+            $order_desc = "Delivery";
+        }
+        else{
+            $order_desc = "Take Away";
+        }
+
+        $user = $arrAuto[0]['usr'];
+        $sc = $arrAuto[0]['service_charge'];
+        $discount = $arrAuto[0]['discount'];
+        $amount = $arrAuto[0]['amount'];
+        $comments = $arrAuto[0]['comments'];
+        $amount_status = $arrAuto[0]['amount_status'];
+        $amount_desc = "";
+
+        if($amount_status == "P"){
+            $amount_desc = "Not Paid";
+        }
+        elseif($amount_status == "P"){
+            $amount_desc = "Paid";
+        }
+        $strForPrint .= "<table width='288' border='0' align='center' cellpadding='0' cellspacing='0'>
   <tr>
 <td align='center' valign='top'>
 			<style type='text/css'>
@@ -257,19 +241,19 @@ if(isset($_POST['method'])){
             <td align='left' valign='top'><strong>Item</strong></td>
             <td width='73' align='right'><strong>Qty</strong></td>
             ";
-		$srno = 0;
-		foreach($arrAuto as $data){	
-		$srno++;	
-		$strForPrint.="	</tr>
+        $srno = 0;
+        foreach($arrAuto as $data){
+            $srno++;
+            $strForPrint.="	</tr>
             
                 <tr>
                   <td align='left' valign='top'>".$srno."</td>
                 <td align='left' valign='top'>".$data['item']."</td>
                 <td align='right'>(".$data['qty'].")</td>
            </tr>";
-		  }
-           
- $strForPrint .="
+        }
+
+        $strForPrint .="
  <tr>
                   <td colspan='3'><hr></td>
                 
@@ -304,10 +288,6 @@ if(isset($_POST['method'])){
   </tr>
 </table>
 <p style='page-break-before: always'>";
-	echo $strForPrint; exit();
-	}
+        echo $strForPrint; exit();
+    }
 }
-
-
-          
-?>

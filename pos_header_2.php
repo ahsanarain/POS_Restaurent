@@ -232,7 +232,7 @@ if(empty($arrAuto)){
 					}
 					$str='';
 					foreach($arrsub as $sub){
-						$str .= $sub['ITEM']." Qty (".$sub['QTY'].")\n";
+						$str .= $sub['item']." Qty (".$sub['qty'].")\n";
 					}
 						$str .= $data['comments'] ?? '';
 					?>
@@ -240,7 +240,7 @@ if(empty($arrAuto)){
 						<th title='<?=$str?>'>
 <input type='button' class='rcvdbtn' act = '<?=$ID?>' value='Rec'> 
 <input type='button' class='cancelbtn' act = '<?=$ID?>' value='Can'>
-<input type='button' class='edtOrderbtn' act = '<?=$ID?>' value='Edt' onclick=" window.open('pos_activity _edt.php?url_id=<?=$ID?>', '_blank');">
+<input type='button' class='edtOrderbtn' act = '<?=$ID?>' value='Edt' onclick=" window.open('pos_activity_edit.php?url_id=<?=$ID?>', '_blank');">
 <input type='button' class='prntbtnC' act = '<?=$ID?>' value='Prnt Cus'>
 <input type='button' class='prntbtnK' act = '<?=$ID?>' value='Prnt Kch'>
 						</th>
@@ -283,8 +283,7 @@ if(empty($arrAuto)){
         		newWin.document.close();
         		newWin.focus();
         		newWin.print();
-        		newWin.close();	
-				
+        		newWin.close();
         }
     });
    });

@@ -172,7 +172,7 @@ if(empty($arrAuto)){
 		</td>
         <td class="admin-tbRow1" valign="top">
         <input type='button' class='rcvdbtn' act = '<?=$ID?>' value='Received'>
-		<input type='button' class='edtOrderbtn' act = '<?=$ID?>' value='Edit Order' onclick=" window.open('pos_activity _edt.php?url_id=<?=$ID?>', '_blank');">
+		<input type='button' class='edtOrderbtn' act = '<?=$ID?>' value='Edit Order' onclick=" window.open('pos_activity_edit.php?url_id=<?=$ID?>', '_blank');">
         <input type='button' class='cancelbtn' act = '<?=$ID?>' value='Cancel'>		</td>
 		<td class="admin-tbRow1 admin-tbRow2" valign="top" align="center">
 		<input type='button' class='prntbtnC' act = '<?=$ID?>' value='For Customer'>

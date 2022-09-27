@@ -1,5 +1,4 @@
 <?php
-//Session started and database connection  included here...
 session_start();
 include('Connections/cn.php');
 require_once('sessions/mysessionscript.php');
@@ -10,19 +9,20 @@ $backuped = $database_cn.date('dmyhis').".sql";
 $dir = "d:/xampp/mysql/bin/";
 $pathto = "d:/databasebackups/".$backuped;
 $msg="";
-if (isset($_POST['backup'])){
-		if(file_exists($pathto)){	
-			$msg="Backup Already Taken";
-	}else{
+
+if (isset($_POST['backup']))
+{
+		if(file_exists($pathto)) $msg="Backup Already Taken";
+        else
+        {
 		$exe = $dir."mysqldump.exe --user=".$username_cn." --password=".$password_cn." ".$dbname." > ".$pathto;
 		exec($exe);
 		$msg="Backup Taken Successfully";
-		
-	}
+        }
 }
 $file = ucwords(strtolower(str_replace ("_"," ",basename($_SERVER["SCRIPT_FILENAME"], '.php'))));
-
 ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>

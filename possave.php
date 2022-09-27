@@ -73,8 +73,4 @@ $insertQry = "insert into order_tab
 	else
 	{
 		header("location:pos_activity.php?msg=Error+Occured.");
-	}  	
-
-//item_id,sub_item_id,item,qty,price,total
-
-?>
+	}
