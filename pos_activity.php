@@ -593,6 +593,7 @@ $file = ucwords(strtolower(str_replace ("_"," ",basename($_SERVER["SCRIPT_FILENA
 <table width='100%' border='0' align='center'>\
             <tr>\
             <td colspan='5' align='center' valign='top'><strong><img width='150px' src='images/logo-qt.png'></strong></td>\
+			</tr>\
 			<tr>\
             <td colspan='3' align='left'><span class='small'>"+(cusname=='' ? 'Customer' : cusname)+"</span></td>\
             <td width='52' align='center'><span class='small'>"+sdtp+"</span></td>\
@@ -649,8 +650,106 @@ $file = ucwords(strtolower(str_replace ("_"," ",basename($_SERVER["SCRIPT_FILENA
   </tr>\
 </table>\
 <div style='margin:150px;'></div>";
+
+            var str3 = "<table width='288' border='0' align='center' cellpadding='0' cellspacing='0'>\
+  <tr>\
+<td align='center' valign='top'>\
+			<style type='text/css'>\
+            	body { margin-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; }\
+            	#newprint { width:288px; margin:auto; height:auto; border:0px solid red; }\
+            	body,td,th { font-family: Verdana; font-size: 10px; }\
+            	.small{ font-family:verdana; font-size:10px;}\
+            </style>\
+<table width='100%' border='0' align='center'>\
+            <tr>\
+            <td colspan='5' align='center' valign='top'><strong><img width='150px' src='images/logo-qt.png'></strong></td>\
+			<tr>\
+            <td colspan='3' align='left'><span class='small'>"+(cusname=='' ? 'Customer' : cusname)+"</span></td>\
+            <td width='52' align='center'><span class='small'>"+sdtp+"</span></td>\
+            <td width='130' align='right'><span class='small'>"+(phno=='' ? '-' : phno)+"</span></td>\
+            </tr>\
+			<tr>\
+            <td colspan='3' align='left' ><span class='small'>"+orderno+"</span></td>\
+            <td width='52' align='right' colspan='2'><span class='small'>"+datetime+"</span></td>\
+            </tr>\
+      </table>\
+	    	<hr>\
+            <table width='100%' border='0'>\
+            <tr bgcolor='#F0F0F0'>\
+            <td width='10'><strong>S#</strong></td>\
+			<td width='100'><strong>Item</strong></td>\
+            <td width='34' align='right'><strong>Qty</strong></td>\
+            <td width='34' align='right'><strong>Price</strong></td>\
+            <td width='34' align='right'><strong>Total</strong></td>\
+            </tr>";
+            str4 = "";
+            var Tqty=0;
+            var counter=1;
+            var gross=0;
+            var price_total = 0;
+
+            for(i=0; i< item.length; i++)
+            {
+                str4 +="<tr>\
+						<td>"+counter+"</td>\
+                		<td>"+item[i]+"</td>\
+                		<td align='right'>("+qty[i]+")</td>\
+                		<td align='right'>("+price[i]+")</td>\
+                		<td align='right'>("+(qty[i]*price[i])+")</td>\
+                	</tr>";
+                counter++;
+                Tqty = parseInt(Tqty) + parseInt(qty[i]);
+                gross = parseInt(gross) + (parseInt(price[i]) * parseInt(qty[i]));
+                price_total =  parseInt(price_total) + parseInt(price[i]);
+            }
+
+            str3 += str4;
+            str3 +="<tr>\
+				<td align='center' colspan='5'><hr></td>\
+			</tr>\
+			<tr>\
+				<td align='center'><strong></strong></td>\
+				<td  align='center'><strong>Total</strong></td>\
+				<td align='right'><strong>("+Tqty+")</strong></td>\
+				<td align='right'><strong>("+price_total+")</strong></td>\
+				<td align='right'><strong>("+gross+")</strong></td>\
+			</tr>\
+			</table>\
+            <hr>\
+            <table width='100%' border='0'>\
+			<tr>\
+     			<td colspan='2'>"+commen+"</td>\
+            </tr>\
+			<hr>\
+			<tr>\
+                <td colspan='2' align='center'><strong>"+amtstatus+"</strong></td>\
+        </tr>\
+            <tr>\
+                <td><strong>Gross Total : </strong></td>\
+                <td align='right' width='54'><font size='2'><b>"+gross+"/-</b></font></td>\
+            </tr>\
+            <tr>\
+                <td><strong> Service Charge:</strong></td>\
+                <td align='right'><font size='2'><b>"+scc+"/-</b></font></td>\
+            </tr>\
+            <tr>\
+                <td><strong></strong><strong>Discount:</strong></td>\
+                <td align='right'><font size='2'><b>"+discount+"/-</b></font></td>\
+            </tr>\
+            <tr>\
+                <td><strong></strong><strong>Net Total:</strong></td>\
+                <td align='right'><font size='2'><b>"+((gross + scc) - discount)+"/-</b></font></td>\
+            </tr>\
+ 			<tr>\
+          <td colspan='2' align='center' valign='top'><span class='small'><br /><?=$org_address?><br><strong>"+msg+"</strong><br>NTN : <?=$ntn?></span></td>\
+           </tr>\
+      </table>\
+	</td>\
+  </tr>\
+</table>\
+<div style='margin:150px;'></div>";
             var win = window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=350,height=700');
-            win.document.write(str+str);
+            win.document.write(str+str3);
             win.print();
             win.close();
         }
